@@ -25,12 +25,12 @@ func InitRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	r.POST("/v1/users/register", v1.PostUserRegister)
-	r.POST("/v1/users/login", v1.PostUserLogin)
-	r.GET("/v1/users/name", v1.GetUserAllUsername) // all/name
-	r.POST("/v1/users/refresh", v1.PostUserRefreshToken)
+	r.POST("/v1/users/register", v1.PostUserRegister)    // register
+	r.POST("/v1/users/login", v1.PostUserLogin)          // login
+	r.GET("/v1/users/name", v1.GetUserAllUsername)       // all/name
+	r.POST("/v1/users/refresh", v1.PostUserRefreshToken) // refresh token
 	// No short-term modifications
-	r.GET("/v1/users/image", v1.GetUserImage)
+	r.GET("/v1/users/image", v1.GetUserImage) // image
 
 	r.GET("/v1/users/status", v1.GetUserStatus) // init/check
 
@@ -46,25 +46,25 @@ func InitRouter() *gin.Engine {
 		v1UsersGroup := v1Group.Group("/users")
 		v1UsersGroup.Use()
 		{
-			v1UsersGroup.GET("/current", v1.GetUserInfo)
-			v1UsersGroup.PUT("/current", v1.PutUserInfo)
-			v1UsersGroup.PUT("/current/password", v1.PutUserPassword)
+			v1UsersGroup.GET("/current", v1.GetUserInfo)              // 获取当前用户信息
+			v1UsersGroup.PUT("/current", v1.PutUserInfo)              // 修改当前用户信息
+			v1UsersGroup.PUT("/current/password", v1.PutUserPassword) // 修改当前用户密码
 
-			v1UsersGroup.GET("/current/custom/:key", v1.GetUserCustomConf)
-			v1UsersGroup.POST("/current/custom/:key", v1.PostUserCustomConf)
-			v1UsersGroup.DELETE("/current/custom/:key", v1.DeleteUserCustomConf)
+			v1UsersGroup.GET("/current/custom/:key", v1.GetUserCustomConf)       // 获取当前用户自定义配置,比如app的安装列表(有序)
+			v1UsersGroup.POST("/current/custom/:key", v1.PostUserCustomConf)     // 修改当前用户自定义配置，比如切换背景墙
+			v1UsersGroup.DELETE("/current/custom/:key", v1.DeleteUserCustomConf) // 删除当前用户自定义配置
 
-			v1UsersGroup.POST("/current/image/:key", v1.PostUserUploadImage)
+			v1UsersGroup.POST("/current/image/:key", v1.PostUserUploadImage) // 上传壁纸
 			v1UsersGroup.PUT("/current/image/:key", v1.PutUserImage)
 			// v1UserGroup.POST("/file/image/:key", v1.PostUserFileImage)
-			v1UsersGroup.DELETE("/current/image", v1.DeleteUserImage)
+			v1UsersGroup.DELETE("/current/image", v1.DeleteUserImage) // 删除用户头像
 
-			v1UsersGroup.PUT("/avatar", v1.PutUserAvatar)
-			v1UsersGroup.GET("/avatar", v1.GetUserAvatar)
+			v1UsersGroup.PUT("/avatar", v1.PutUserAvatar) // 修改用户头像,没看到使用
+			v1UsersGroup.GET("/avatar", v1.GetUserAvatar) // 获取用户头像
 
-			v1UsersGroup.DELETE("/:id", v1.DeleteUser)
-			v1UsersGroup.GET("/:username", v1.GetUserInfoByUsername)
-			v1UsersGroup.DELETE("", v1.DeleteUserAll)
+			v1UsersGroup.DELETE("/:id", v1.DeleteUser)               // 删除用户
+			v1UsersGroup.GET("/:username", v1.GetUserInfoByUsername) // 获取用户信息
+			v1UsersGroup.DELETE("", v1.DeleteUserAll)                // 删除所有用户
 		}
 	}
 

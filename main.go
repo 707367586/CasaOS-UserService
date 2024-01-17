@@ -70,8 +70,8 @@ func init() {
 		*dbFlag = config.AppInfo.DBPath
 	}
 
-	sqliteDB := sqlite.GetDb(*dbFlag)
-	service.MyService = service.NewService(sqliteDB, config.CommonInfo.RuntimePath)
+	sqliteDB := sqlite.GetDb(*dbFlag)                                               // 获取数据库对象
+	service.MyService = service.NewService(sqliteDB, config.CommonInfo.RuntimePath) // 初始化服务
 
 	if *resetUserFlag {
 		if userFlag == nil || len(*userFlag) == 0 {
