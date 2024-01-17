@@ -117,9 +117,6 @@ archives:
     builds:
       - casaos-user-service-amd64
       - casaos-user-service-arm64
-      - casaos-user-service-arm-7
-    replacements:
-      arm: arm-7
     files:
       - build/**/*
   - name_template: "{{ .Os }}-{{ .Arch }}-{{ .ProjectName }}-migration-tool-v{{ .Version }}"
@@ -127,9 +124,6 @@ archives:
     builds:
       - casaos-user-service-migration-tool-amd64
       - casaos-user-service-migration-tool-arm64
-      - casaos-user-service-migration-tool-arm-7
-    replacements:
-      arm: arm-7
     files:
       - build/sysroot/etc/**/*
 checksum:
